@@ -90,9 +90,3 @@ make airflow
 - PostgreSQL
 - Docker
 - Python
-
-## Kontribusi
-Silakan ajukan issues dan permintaan peningkatan fitur.
-
-## Lisensi
-[MIT License](LICENSE)
