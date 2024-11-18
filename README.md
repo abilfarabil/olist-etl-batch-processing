@@ -1,92 +1,102 @@
 # Olist ETL Batch Processing
 
-## Ringkasan
-Proyek ini mengimplementasikan pipeline ETL (Extract, Transform, Load) batch processing untuk data e-commerce Olist menggunakan Apache Airflow, Apache Spark, dan PostgreSQL. Pipeline ini mengekstrak data dari file CSV, memuatnya ke PostgreSQL, dan melakukan analisis performa penjualan berdasarkan wilayah.
+## Overview
+This project implements an ETL (Extract, Transform, Load) batch processing pipeline for Olist e-commerce data using Apache Airflow, Apache Spark, and PostgreSQL. The pipeline extracts data from CSV files, loads it into PostgreSQL, and performs sales performance analysis based on geographical regions.
 
-## Arsitektur
+## System Architecture
 ![Containers](images/docker-containers.png)
 
-Proyek ini menggunakan tiga komponen utama:
-- **Apache Airflow**: Untuk orkestrator alur kerja
-- **Apache Spark**: Untuk pemrosesan data
-- **PostgreSQL**: Untuk penyimpanan dan analisis data
+The project utilizes three main components:
+- **Apache Airflow**: Workflow orchestration
+- **Apache Spark**: Data processing engine
+- **PostgreSQL**: Data storage and analysis
 
-## Komponen
-
-### 1. Proses ETL
-Proses ETL mengekstrak data dari file CSV Olist dan memuatnya ke dalam tabel PostgreSQL.
-
-#### Tampilan DAG Airflow
-![ETL DAG List](images/etl-dag-list.png)
-
-#### Graph DAG ETL
-![ETL DAG Graph](images/etl-dag-graph.png)
-
-#### Status Sukses ETL
-![ETL Success](images/etl-dag-success.png)
-
-#### Verifikasi Data
-![ETL Postgres Verification](images/etl-postgres-verify.png)
-
-### 2. Proses Analisis
-Proses analisis membaca data dari PostgreSQL dan melakukan analisis performa penjualan berdasarkan wilayah.
-
-#### Graph DAG Analisis
-![Analysis DAG Graph](images/analysis-dag-graph.png)
-
-#### Status Sukses Analisis
-![Analysis Success](images/analysis-dag-success.png)
-
-#### Hasil Analisis
-![Analysis Results](images/analysis-results.png)
-
-## Persiapan Proyek
-
-### Prasyarat
-- Docker
-- Docker Compose
+## Prerequisites
+- Docker & Docker Compose
 - Make
+- Python 3.8+
+- Minimum 8GB RAM recommended
 
-### Persiapan Lingkungan
+## Installation & Setup
 1. Clone repository
 ```bash
 git clone https://github.com/abilfarabil/olist-etl-batch-processing.git
 cd olist-etl-batch-processing
 ```
 
-2. Menjalankan layanan
+2. Start services
 ```bash
 make postgres
 make spark
 make airflow
 ```
 
-### Menjalankan Pipeline
-1. Akses Airflow UI di `localhost:8081`
-   - Username: airflow
-   - Password: airflow
+3. Access Airflow UI
+- URL: `localhost:8081`
+- Username: airflow
+- Password: airflow
 
-2. Aktifkan dan jalankan DAG secara berurutan:
-   - `olist_etl_process`
-   - `olist_analysis_process`
+## Pipeline Components
 
-## Struktur Proyek
-```
-├── dags/                      # File-file DAG Airflow
-├── data/                      # File-file data input
-│   └── olist/                 # Dataset Olist
-├── docker/                    # File konfigurasi Docker
-├── logs/                      # File log
-├── notebooks/                 # Jupyter notebooks
-├── scripts/                   # Script utilitas
-├── spark-scripts/            # Script pemrosesan Spark
-│   └── jars/                 # File JAR yang diperlukan
-└── sql/                      # Script SQL
-```
+### 1. ETL Process
+The ETL process extracts data from Olist CSV files and loads them into PostgreSQL tables.
 
-## Teknologi yang Digunakan
-- Apache Airflow
-- Apache Spark (PySpark)
-- PostgreSQL
-- Docker
-- Python
+#### Airflow DAG View
+![ETL DAG List](images/etl-dag-list.png)
+
+#### ETL DAG Graph
+![ETL DAG Graph](images/etl-dag-graph.png)
+
+#### ETL Success Status
+![ETL Success](images/etl-dag-success.png)
+
+#### Data Verification
+![ETL Postgres Verification](images/etl-postgres-verify.png)
+
+### 2. Analysis Process
+The analysis process reads data from PostgreSQL and performs sales performance analysis by region.
+
+#### Analysis DAG Graph
+![Analysis DAG Graph](images/analysis-dag-graph.png)
+
+#### Analysis Success Status
+![Analysis Success](images/analysis-dag-success.png)
+
+#### Analysis Results
+![Analysis Results](images/analysis-results.png)
+
+## Features
+- Automated ETL pipeline using Apache Airflow
+- Scalable data processing with Apache Spark
+- Data storage and analysis in PostgreSQL
+- Containerized environment with Docker
+- Sales performance analysis by region
+- Data quality checks and verification
+
+## Technical Documentation
+### ETL Pipeline
+- Extracts data from Olist CSV files
+- Performs data cleaning and transformation
+- Loads processed data into PostgreSQL
+- Includes data validation steps
+
+### Analysis Pipeline
+- Calculates regional sales metrics
+- Generates performance reports
+- Exports results to specified format
+
+## Technologies Used
+- Apache Airflow 2.x
+- Apache Spark 3.x
+- PostgreSQL 13
+- Python 3.8+
+- Docker & Docker Compose
+- Make
+
+## References
+- [Apache Airflow Documentation](https://airflow.apache.org/docs/)
+- [Apache Spark Documentation](https://spark.apache.org/docs/latest/)
+- [Olist Dataset](https://www.kaggle.com/olist/brazilian-ecommerce)
+
+## Contributing
+Feel free to submit issues, fork the repository, and create pull requests for any improvements.
